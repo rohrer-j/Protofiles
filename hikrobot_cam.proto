@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package hikrobot;
+
+service HikRobotCameraService {
+    rpc Connect (ConnectRequest) returns (google.protobuf.Empty);
+    rpc GetImage (GetImageRequest) returns (GetImageResponse);
+    rpc SetExposure (SetExposureRequest) returns (google.protobuf.Empty);
+    rpc SetGain (SetGainRequest) returns (google.protobuf.Empty);
+    rpc SetFrameRate (SetFrameRateRequest) returns (google.protobuf.Empty);
+}
+
+message ConnectRequest {
+    string serial_number = 1;
+}
+
+message ConnectResponse {
+    string message = 1;
+    bool success = 2;
+}
+
+message GetImageRequest {}
+
+message GetImageResponse {
+    bytes image_data = 1; // The image data in a byte array
+    int32 width = 2;
+    int32 height = 3;
+}
+
+message SetExposureRequest {
+    float exposure_time_us = 1;
+}
+
+message SetGainRequest {
+    float gain = 1;
+}
+
+message SetFrameRateRequest {
+    float frame_rate = 1;
+}
